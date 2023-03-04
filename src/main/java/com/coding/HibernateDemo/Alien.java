@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 //import javax.persistence.Transient;
 
-@Entity(name = "alien")
+@Entity(name = "alien_table")
 public class Alien {  //POJO
 	
 	@Id
 	private int aid;
 	//@Transient   //will not include this firld as column name if we use this 
-	private String aname;
+	private AlienName aname;
 	//@Column(name = "alien_color")
 	private String color;
 	public int getAid() {
@@ -20,10 +20,10 @@ public class Alien {  //POJO
 	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getAname() {
+	public AlienName getAname() {
 		return aname;
 	}
-	public void setAname(String aname) {
+	public void setAname(AlienName aname) {
 		this.aname = aname;
 	}
 	public String getColor() {
