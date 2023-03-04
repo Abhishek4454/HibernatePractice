@@ -1,18 +1,18 @@
 package com.coding.HibernateDemo;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+//import javax.persistence.Transient;
 
-@Entity(name = "alien_table")
+@Entity(name = "alien")
 public class Alien {  //POJO
 	
 	@Id
 	private int aid;
-	@Transient   //will not include this firld as column name if we use this 
+	//@Transient   //will not include this firld as column name if we use this 
 	private String aname;
-	@Column(name = "alien_color")
+	//@Column(name = "alien_color")
 	private String color;
 	public int getAid() {
 		return aid;
@@ -31,6 +31,10 @@ public class Alien {  //POJO
 	}
 	public void setColor(String color) {
 		this.color = color;
+	}
+	@Override
+	public String toString() {
+		return "Alien [aid=" + aid + ", aname=" + aname + ", color=" + color + "]";
 	}
 	
 	

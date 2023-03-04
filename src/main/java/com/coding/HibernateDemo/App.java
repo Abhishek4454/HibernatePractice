@@ -17,10 +17,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        Alien alien= new Alien();
-        alien.setAid(103);
-        alien.setAname("Neha");
-        alien.setColor("Blue");
+//        Alien alien= new Alien();
+//        alien.setAid(103);
+//        alien.setAname("Neha");
+//        alien.setColor("Blue");
         
         
         Configuration con= new Configuration().configure().addAnnotatedClass(Alien.class);
@@ -28,8 +28,10 @@ public class App
         SessionFactory  sf=con.buildSessionFactory(reg);
         Session session= sf.openSession();
         Transaction tx=session.beginTransaction();
-        session.save(alien);		
+        //session.save(alien);	
+        Alien alien= session.get(Alien.class,101);
         tx.commit();
+        System.out.println(alien.toString());
     }
     
 }
