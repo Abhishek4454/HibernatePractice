@@ -1,11 +1,17 @@
 package com.coding.HibernateDemo;
 
+import javax.persistence.Cacheable;
 //import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 //import javax.persistence.Transient;
 
 @Entity(name = "alien_table")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)//By Default no startegy is configured
 public class Alien {  //POJO
 	
 	@Id
