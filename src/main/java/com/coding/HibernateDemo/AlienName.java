@@ -33,4 +33,9 @@ public class AlienName {
 		this.lname = lname;
 	}
 
+	@Override
+	public String toString() {
+		return "AlienName [fname=" + fname + ", mname=" + mname + ", lname=" + lname + "]";
+	}
+
 }
