@@ -3,11 +3,13 @@ package com.coding.HibernateDemo;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 public class App {
@@ -28,8 +30,11 @@ public class App {
 		Session session1 = sf.openSession();
 		Transaction tx = session1.beginTransaction();
 		//Because of 1st level cache hibernate is able to reuse the same query 
-		Alien al = session1.get(Alien.class, 101);
-		al = session1.get(Alien.class, 101);
+		//Alien al = session1.get(Alien.class, 101);
+		//al = session1.get(Alien.class, 101);
+		Query<Alien> q1=session1.createQuery("from alien_table where aid=101");
+		q1.setCacheable(true);
+		Alien al=q1.uniqueResult();
 		System.out.println(al.toString());  
 		tx.commit();
 		session1.close();
@@ -39,8 +44,11 @@ public class App {
 		//Usecase to be done for EH Cache i.e 2nd level Caching
 		Session session2 = sf.openSession();
 		Transaction tx1 = session2.beginTransaction();
-		Alien al2 = session2.get(Alien.class, 101);
-		al2 = session2.get(Alien.class, 101);
+		//Alien al2 = session2.get(Alien.class, 101);
+		//al2 = session2.get(Alien.class, 101);
+		Query<Alien> q2=session2.createQuery("from alien_table where aid=101");
+		q2.setCacheable(true);
+		al=q2.uniqueResult();
 		System.out.println(al.toString());  
 		tx1.commit();
 		session2.close();
