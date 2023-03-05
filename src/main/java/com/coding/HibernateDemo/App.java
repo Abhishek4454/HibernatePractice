@@ -34,6 +34,9 @@ public class App {
 		student.setRollno(1);
 		student.setName("Abhishek");
 		student.setLaptop(listLaptop);
+		List<Student> listStudent=new ArrayList<Student>();
+		listStudent.add(student);
+		laptop.setStudent(listStudent);
 		
 		Configuration con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();

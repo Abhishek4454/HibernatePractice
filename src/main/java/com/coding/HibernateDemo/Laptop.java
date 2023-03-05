@@ -1,7 +1,10 @@
 package com.coding.HibernateDemo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -11,12 +14,12 @@ public class Laptop {
 	private int lid;
 	private String lname;
 	
-	@ManyToOne
-	private Student student;
-	public Student getStudent() {
+	@ManyToMany
+	private List<Student> student;
+	public List<Student> getStudent() {
 		return student;
 	}
-	public void setStudent(Student student) {
+	public void setStudent(List<Student> student) {
 		this.student = student;
 	}
 	public int getLid() {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Student {
@@ -13,7 +13,7 @@ public class Student {
 	@Id
 	private int rollno;
 	private int marks;
-	@OneToMany(mappedBy = "student")
+	@ManyToMany(mappedBy = "student")
 	private List<Laptop> laptop;
 
 	public String getName() {
