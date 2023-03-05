@@ -1,5 +1,8 @@
 package com.coding.HibernateDemo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,12 +26,14 @@ public class App {
 		Laptop laptop= new Laptop();
 		laptop.setLid(101);
 		laptop.setLname("HP");
+		List<Laptop> listLaptop=new ArrayList<Laptop>();
+		listLaptop.add(laptop);
 		
 		Student student= new Student();
 		student.setMarks(56);
 		student.setRollno(1);
 		student.setName("Abhishek");
-		student.setLaptop(laptop);
+		student.setLaptop(listLaptop);
 		
 		Configuration con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
