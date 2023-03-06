@@ -15,54 +15,39 @@ import org.hibernate.service.ServiceRegistry;
 
 public class App {
 	public static void main(String[] args) {
-//		AlienName an = new AlienName();
-//		an.setFname("chuchu");
-//		an.setMname("Neha");
-//		an.setLname("Sinha");
-//		Alien alien = new Alien();
-//		alien.setAid(101);
-//		alien.setAname(an);
-//		alien.setColor("Blue");
 
-		
-//		Configuration con = new Configuration().configure().addAnnotatedClass(Alien.class);
-//		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-//		SessionFactory sf = con.buildSessionFactory(reg);
-//		Session session1 = sf.openSession();
-//		Transaction tx = session1.beginTransaction();
-//		//Because of 1st level cache hibernate is able to reuse the same query 
-//		//Alien al = session1.get(Alien.class, 101);
-//		//al = session1.get(Alien.class, 101);
-//		Query<Alien> q1=session1.createQuery("from alien_table where aid=101");
-//		q1.setCacheable(true);
-//		Alien al=q1.uniqueResult();
-//		System.out.println(al.toString());  
-//		tx.commit();
-//		session1.close();
-//		
-//		//Here new session has been opened and same query is being fired but 
-//		//Query is not cached
-//		//Usecase to be done for EH Cache i.e 2nd level Caching
-//		Session session2 = sf.openSession();
-//		Transaction tx1 = session2.beginTransaction();
-//		//Alien al2 = session2.get(Alien.class, 101);
-//		//al2 = session2.get(Alien.class, 101);
-//		Query<Alien> q2=session2.createQuery("from alien_table where aid=101");
-//		q2.setCacheable(true);
-//		al=q2.uniqueResult();
-//		System.out.println(al.toString());  
-//		tx1.commit();
-//		session2.close();
 		Employee emp= null;
 		Configuration con = new Configuration().configure().addAnnotatedClass(Employee.class);
 		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
 		SessionFactory sf = con.buildSessionFactory(reg);
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
+		
 		Query<Employee> query= session.createQuery("from Employee where salary<50000");
+		
 		List<Employee> list=query.list();
 		System.out.println(list);
 		System.out.println(list.size());
+		
+		Query<Object> query1= session.createQuery("select eid,ename,salary from Employee where eid=102");
+		Object[] employee=(Object[]) query1.uniqueResult();
+		
+		for(Object emp1:employee) {
+			System.out.println(emp1);
+		}
+		
+		Query query2= session.createQuery("select eid,ename,salary from Employee where salary<50000");
+		List<Object[]> employees=query2.list();
+		
+		for(Object[] emp1: employees) {
+			System.out.println(emp1[0]+" : "+ emp1[1]+" : "+emp1[2]);
+		}
+		
+		Query query3= session.createQuery("select sum(salary) from Employee where salary<50000");
+	    Long totalSalary=(Long) query3.uniqueResult();
+		
+		System.out.println(totalSalary);
+		
 
 //		Random r=new Random();
 //		for(int i=100;i<150;i++) {
